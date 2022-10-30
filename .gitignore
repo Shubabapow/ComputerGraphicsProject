@@ -1,0 +1,4 @@
+My project Unity/TestBuild
+My project Unity/Library/PackageCache/*
+*.dll
+*.bin
