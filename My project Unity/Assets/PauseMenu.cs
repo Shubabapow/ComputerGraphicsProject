@@ -7,17 +7,18 @@ public class PauseMenu : MonoBehaviour
 {
     public static bool GameIsPaused = false;
     public GameObject pauseMenuUI;
-    public float savedMouseSensetivity;
     public GameObject crossHier;
     public GameObject GameOverMenu;
-    public static int mTime = 30;
+    public static int mTime = 31;
     public bool mGameOver = false;
+
+    PlayerController controller = new PlayerController();
 
     void Start()
     {
         InvokeRepeating("Count", 0.0f, 1.0f);
     }
-
+    // in game timer
     void Count()
     {
         if(mTime == 0){
@@ -28,8 +29,8 @@ public class PauseMenu : MonoBehaviour
             Time.timeScale = 0f;
             Cursor.lockState = CursorLockMode.Confined;
             Cursor.visible = true;
-            savedMouseSensetivity = PlayerController.mouseSensitivity;
-            PlayerController.mouseSensitivity = 0;
+            PlayerController.pause = true;
+            //Debug.Log(savedMouseSensetivity);
         } else{
             mTime--;
         }
@@ -56,6 +57,7 @@ public class PauseMenu : MonoBehaviour
         }
 
     }
+    // function to resume the game
     public void Resume (){
         pauseMenuUI.SetActive(false);
         crossHier.SetActive(true);
@@ -63,9 +65,10 @@ public class PauseMenu : MonoBehaviour
         GameIsPaused =false;
 
         Cursor.lockState = CursorLockMode.Locked;
-        PlayerController.mouseSensitivity = savedMouseSensetivity;
+        PlayerController.pause = false;
     }
 
+    // function to simulate a pause
     void Pause (){
         pauseMenuUI.SetActive(true);
         crossHier.SetActive(false);
@@ -73,22 +76,34 @@ public class PauseMenu : MonoBehaviour
         GameIsPaused =true;
         Cursor.lockState = CursorLockMode.Confined;
         Cursor.visible = true;
-        savedMouseSensetivity = PlayerController.mouseSensitivity;
-        PlayerController.mouseSensitivity = 0;
+        PlayerController.pause = true;
     }
 
+    // Loads the main menu when the main menu button is pressed on the pause menu
     public void LoadMenu()
     {
         SceneManager.LoadScene("Menu");
         GameIsPaused = false;
         Time.timeScale = 1f;
-        PlayerController.mouseSensitivity = savedMouseSensetivity;
+        PlayerController.pause = false;
         mGameOver = false;
         GameOverMenu.SetActive(false);
+        RestartGame();
         
     }
 
     public static int fTime{
         get {return mTime;}
+    }
+    // Resets all game variables
+    public void RestartGame(){
+        mTime = 31;
+        PlayerController.pause = false;
+        GameOverMenu.SetActive(false);
+        crossHier.SetActive(true);
+        TargetShooter.targetCount = 0;
+        TargetShooter.hitPercentage = 0;
+        //Cursor.visible = false;
+
     }
 }
