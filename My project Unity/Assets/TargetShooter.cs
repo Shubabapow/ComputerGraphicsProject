@@ -8,7 +8,7 @@ public class TargetShooter : MonoBehaviour
     [SerializeField] Camera cam;
     public int targetCount;
     public int clickCount;
-    public static float hitPercentage;
+    public float hitPercentage;
 
     void Update(){
 
