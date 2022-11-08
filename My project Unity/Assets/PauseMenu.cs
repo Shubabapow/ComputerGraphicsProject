@@ -10,7 +10,7 @@ public class PauseMenu : MonoBehaviour
     public GameObject crossHier;
     public GameObject GameOverMenu;
     public static int mTime = 31;
-    public bool mGameOver = false;
+    public static bool mGameOver = false;
 
     PlayerController controller = new PlayerController();
 
@@ -99,10 +99,13 @@ public class PauseMenu : MonoBehaviour
     public void RestartGame(){
         mTime = 31;
         PlayerController.pause = false;
-        GameOverMenu.SetActive(false);
-        crossHier.SetActive(true);
-        TargetShooter.targetCount = 0;
-        TargetShooter.hitPercentage = 0;
+        //GameOverMenu.SetActive(false);
+        //crossHier.SetActive(true);
+        GameStats.targetsHit = 0;
+        GameStats.accuracy = 0;
+        GameStats.totalShots = 0;
+        mGameOver = false;
+        Debug.Log(mGameOver);
         //Cursor.visible = false;
 
     }

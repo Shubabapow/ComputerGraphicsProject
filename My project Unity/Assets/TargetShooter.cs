@@ -6,9 +6,6 @@ public class TargetShooter : MonoBehaviour
 {
 
     [SerializeField] Camera cam;
-    public static int targetCount;
-    public static int clickCount;
-    public static float hitPercentage;
 
     public GameObject waitingToStart;
     public int start = 0;
@@ -28,24 +25,18 @@ public class TargetShooter : MonoBehaviour
             GameWaiting();
         }
 
-        if(Input.GetMouseButtonDown(0) && start >= 1){
-            clickCount ++;
+        if(Input.GetMouseButtonDown(0) && start >= 1 && PauseMenu.GameIsPaused == false && PauseMenu.mGameOver == false){
+            GameStats.totalShots += 1;
             Ray ray = cam.ViewportPointToRay(new Vector3(0.5f, 0.5f));
             if(Physics.Raycast(ray, out RaycastHit hit)){
 
                 Target target = hit.collider.gameObject.GetComponent<Target>();
                 if(target != null){
                     target.Hit();
-                    targetCount ++;
+                    GameStats.targetsHit += 1;
                 } 
             }
 
-
-       hitPercentage = targetCount/clickCount;
-        //Debug.Log("hit %");
-        //Debug.Log(hitPercentage);
-       // Debug.Log("target count");
-       // Debug.Log(targetCount);
         }
     }
 
