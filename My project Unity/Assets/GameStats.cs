@@ -11,6 +11,8 @@ public class GameStats : MonoBehaviour
     public static float accuracy;
     public Text score;
     public Text percentage;
+    public Text scoreLive;
+    public Text percentageLive;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,7 +23,9 @@ public class GameStats : MonoBehaviour
     void Update()
     {
         score.text = "Targets Shot: " + targetsHit.ToString();
+        scoreLive.text = "Targets Shot: " + targetsHit.ToString();
         accuracy = targetsHit/totalShots*100;
         percentage.text = "Accuracy: " + accuracy.ToString("F2") + "%";
+        percentageLive.text = "Accuracy: " + accuracy.ToString("F2") + "%";
     }
 }
