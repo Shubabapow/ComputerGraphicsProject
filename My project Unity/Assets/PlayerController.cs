@@ -6,6 +6,7 @@ public class PlayerController : MonoBehaviour
 {
 
     [SerializeField] Transform cameraHolder;
+    public static string playerName;
     public static float mouseSensitivity = 1;
     float verticalLookRotation;
     public static bool pause = false;

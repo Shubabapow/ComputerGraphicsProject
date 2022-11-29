@@ -10,6 +10,9 @@ public class TargetShooter : MonoBehaviour
     public GameObject waitingToStart;
     public int start = 0;
     public ParticleSystem muzzleFlash;
+    public ParticleSystem muzzleFlash2;
+    public ParticleSystem muzzleFlash3;
+    public ParticleSystem muzzleFlash4;
 
     PlayerController controller = new PlayerController();
 
@@ -29,6 +32,9 @@ public class TargetShooter : MonoBehaviour
         if(Input.GetMouseButtonDown(0) && start >= 1 && PauseMenu.GameIsPaused == false && PauseMenu.mGameOver == false){
             GameStats.totalShots += 1;
             muzzleFlash.Play();
+            muzzleFlash2.Play();
+            muzzleFlash3.Play();
+            muzzleFlash4.Play();
             Ray ray = cam.ViewportPointToRay(new Vector3(0.5f, 0.5f));
             if(Physics.Raycast(ray, out RaycastHit hit)){
 

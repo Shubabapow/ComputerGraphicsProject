@@ -8,6 +8,8 @@ public class SettingsMenu : MonoBehaviour
 
   public Dropdown resolutionDropdown;
 
+  //public GameObject textDisplay;
+
   Resolution[] resolutions;
 
     public static void AdjustMouseSens(float newMouseSens) {
